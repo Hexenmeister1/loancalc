@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Spring",
+      "type": "java",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": 5005,
+      "preLaunchTask": "spring-boot: debug-run"
+    },
+    {
+      "name": "Attach to Chrome",
+      "type": "chrome",
+      "request": "attach",
+      // "port": 9222,
+      "urlFilter": "http://localhost:4200/*",
+      "webRoot": "${workspaceFolder}/loancalculator-front/src",
+      "sourceMaps": true,
+      "preLaunchTask": "ng-serve"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.jdt.ls.java.home": "/usr/lib/jvm/temurin-25-jdk-amd64",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-25",
+            "path": "/usr/lib/jvm/temurin-25-jdk-amd64",
+            "default": true
+        }
+    ],
+    "java.import.gradle.java.home": "/usr/lib/jvm/temurin-25-jdk-amd64",
+    "java.format.settings.url": ".vscode/java-formatter.xml"
+}

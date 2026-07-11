@@ -1,0 +1,67 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "spring-boot: run",
+      "type": "shell",
+      "command": "./mvnw spring-boot:run",
+      "options": {
+        "cwd": "${workspaceFolder}/loancalculator"
+      },
+      // "env": {
+      //   "JAVA_HOME": "/usr/lib/jvm/temurin-25-jdk-amd64",
+      //   "PATH": "/usr/lib/jvm/temurin-25-jdk-amd64/bin:${env:PATH}"
+      // },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "spring-boot: debug-run",
+      "type": "shell",
+      "command": "export JAVA_HOME=/usr/lib/jvm/temurin-25-jdk-amd64 && export PATH=$JAVA_HOME/bin:$PATH && ./mvnw -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005' spring-boot:run",
+      "options": {
+        "cwd": "${workspaceFolder}/loancalculator"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+          "pattern": {
+              "regexp": "^.*"
+          },
+          "background": {
+              "activeOnStart": true,
+              "beginsPattern": "^.*Bootstrapping Spring EmbeddedWebApplicationContext.*",
+              "endsPattern": "^.*Started [A-Za-z0-9_]+ in [0-9.]+ seconds.*"
+          }
+      }
+    },
+    {
+        "label": "ng-serve",
+        "type": "shell",
+        "command": "ng serve",
+        "options": {
+            "cwd": "${workspaceFolder}/loancalculator-front"
+        },
+        "isBackground": true,
+        "problemMatcher": {
+            "owner": "typescript",
+            "source": "ts",
+            "applyTo": "allDocuments",
+            "fileLocation": "relative",
+            "pattern": {
+                "regexp": "^([a-zA-Z]?:[^:]+):(\\d+):(\\d+):\\s+(error|warning)\\s+(TS\\d+):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                // "character": 3,
+                "severity": 4,
+                "code": 5,
+                "message": 6
+            },
+            "background": {
+                "activeOnStart": true,
+                "beginsPattern": "Browser application bundle generation|Compiled successfully|Building",
+                "endsPattern": "Compiled successfully|Failed to compile"
+            }
+        }
+    }
+  ]
+}
