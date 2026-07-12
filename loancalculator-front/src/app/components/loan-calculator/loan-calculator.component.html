@@ -1,81 +1,109 @@
 <div class="container">
-    <h1>Loan Amortization Calculator</h1>
+  <h1>Loan Amortization Calculator</h1>
 
-    <div class="calculator-card">
-        <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="loanAmount">Loan Amount (€)</label>
-                    <input
-                        type="number"
-                        id="loanAmount"
-                        formControlName="loanAmount"
-                        [class.error]="loanForm.get('loanAmount')?.invalid && loanForm.get('loanAmount')?.touched"
-                    >
-                    <div class="error-message" *ngIf="loanForm.get('loanAmount')?.invalid && loanForm.get('loanAmount')?.touched">
-                        {{ getErrorMessage('loanAmount') }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="interestRate">Interest Rate (%)</label>
-                    <input
-                        type="number"
-                        id="interestRate"
-                        formControlName="interestRate"
-                        step="0.01"
-                        [class.error]="loanForm.get('interestRate')?.invalid && loanForm.get('interestRate')?.touched"
-                    >
-                    <div class="error-message" *ngIf="loanForm.get('interestRate')?.invalid && loanForm.get('interestRate')?.touched">
-                        {{ getErrorMessage('interestRate') }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="initialRepaymentRate">Initial Repayment Rate (%)</label>
-                    <input
-                        type="number"
-                        id="initialRepaymentRate"
-                        formControlName="initialRepaymentRate"
-                        step="0.01"
-                        [class.error]="loanForm.get('initialRepaymentRate')?.invalid && loanForm.get('initialRepaymentRate')?.touched"
-                    >
-                    <div class="error-message" *ngIf="loanForm.get('initialRepaymentRate')?.invalid && loanForm.get('initialRepaymentRate')?.touched">
-                        {{ getErrorMessage('initialRepaymentRate') }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="interestFixationYears">Interest Fixation (Years)</label>
-                    <input
-                        type="number"
-                        id="interestFixationYears"
-                        formControlName="interestFixationYears"
-                        [class.error]="loanForm.get('interestFixationYears')?.invalid && loanForm.get('interestFixationYears')?.touched"
-                    >
-                    <div class="error-message" *ngIf="loanForm.get('interestFixationYears')?.invalid && loanForm.get('interestFixationYears')?.touched">
-                        {{ getErrorMessage('interestFixationYears') }}
-                    </div>
-                </div>
+  <div class="calculator-card">
+    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="loanAmount">Loan Amount (€)</label>
+          <input
+            type="number"
+            id="loanAmount"
+            formControlName="loanAmount"
+            [class.error]="
+              loanForm.get('loanAmount')?.invalid && loanForm.get('loanAmount')?.touched
+            "
+          />
+          @if (loanForm.get('loanAmount')?.invalid && loanForm.get('loanAmount')?.touched) {
+            <div class="error-message">
+              {{ getErrorMessage('loanAmount') }}
             </div>
-
-            <div class="button-group">
-                <button type="submit" [disabled]="loading || loanForm.invalid">
-                    <span *ngIf="loading">Calculating...</span>
-                    <span *ngIf="!loading">Calculate Amortization Schedule</span>
-                </button>
-                <button type="button" (click)="resetForm()" class="btn-secondary">
-                    Reset
-                </button>
-            </div>
-        </form>
-
-        <div class="error-message" *ngIf="error">
-            <i class="error-icon">⚠️</i> {{ error }}
+          }
         </div>
-    </div>
 
-    <div *ngIf="showSchedule && scheduleResult">
-        <app-loan-schedule [schedule]="scheduleResult"></app-loan-schedule>
+        <div class="form-group">
+          <label for="interestRate">Interest Rate (%)</label>
+          <input
+            type="number"
+            id="interestRate"
+            formControlName="interestRate"
+            step="0.01"
+            [class.error]="
+              loanForm.get('interestRate')?.invalid && loanForm.get('interestRate')?.touched
+            "
+          />
+          @if (loanForm.get('interestRate')?.invalid && loanForm.get('interestRate')?.touched) {
+            <div class="error-message">
+              {{ getErrorMessage('interestRate') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="initialRepaymentRate">Initial Repayment Rate (%)</label>
+          <input
+            type="number"
+            id="initialRepaymentRate"
+            formControlName="initialRepaymentRate"
+            step="0.01"
+            [class.error]="
+              loanForm.get('initialRepaymentRate')?.invalid &&
+              loanForm.get('initialRepaymentRate')?.touched
+            "
+          />
+          @if (
+            loanForm.get('initialRepaymentRate')?.invalid &&
+            loanForm.get('initialRepaymentRate')?.touched
+          ) {
+            <div class="error-message">
+              {{ getErrorMessage('initialRepaymentRate') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="interestFixationYears">Interest Fixation (Years)</label>
+          <input
+            type="number"
+            id="interestFixationYears"
+            formControlName="interestFixationYears"
+            [class.error]="
+              loanForm.get('interestFixationYears')?.invalid &&
+              loanForm.get('interestFixationYears')?.touched
+            "
+          />
+          @if (
+            loanForm.get('interestFixationYears')?.invalid &&
+            loanForm.get('interestFixationYears')?.touched
+          ) {
+            <div class="error-message">
+              {{ getErrorMessage('interestFixationYears') }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" [disabled]="loading || loanForm.invalid">
+          @if (loading) {
+            <span>Calculating...</span>
+          }
+          @if (!loading) {
+            <span>Calculate Amortization Schedule</span>
+          }
+        </button>
+        <button type="button" (click)="resetForm()" class="btn-secondary">Reset</button>
+      </div>
+    </form>
+
+    @if (error) {
+      <div class="error-message"><i class="error-icon">⚠️</i> {{ error }}</div>
+    }
+  </div>
+    {{ scheduleResult }}
+  @if (showSchedule && scheduleResult) {
+    <div>
+      <app-loan-schedule [schedule]="scheduleResult"></app-loan-schedule>
     </div>
+  }
 </div>
