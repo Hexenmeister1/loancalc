@@ -1,6 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "Debug Spring",
       "type": "java",
@@ -10,14 +11,16 @@
       "preLaunchTask": "spring-boot: debug-run"
     },
     {
-      "name": "Attach to Chrome",
+      "name": "Debug Angular",
       "type": "chrome",
-      "request": "attach",
-      // "port": 9222,
-      "urlFilter": "http://localhost:4200/*",
-      "webRoot": "${workspaceFolder}/loancalculator-front/src",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/loancalculator-front",
       "sourceMaps": true,
-      "preLaunchTask": "ng-serve"
+      "preLaunchTask": "ng-serve",
+      "pathMapping": {
+        "/": "${workspaceFolder}/loancalculator-front"
+      }
     }
   ]
 }

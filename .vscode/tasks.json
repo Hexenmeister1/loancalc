@@ -8,10 +8,10 @@
       "options": {
         "cwd": "${workspaceFolder}/loancalculator"
       },
-      // "env": {
-      //   "JAVA_HOME": "/usr/lib/jvm/temurin-25-jdk-amd64",
-      //   "PATH": "/usr/lib/jvm/temurin-25-jdk-amd64/bin:${env:PATH}"
-      // },
+      "env": {
+        "JAVA_HOME": "/usr/lib/jvm/temurin-25-jdk-amd64",
+        "PATH": "/usr/lib/jvm/temurin-25-jdk-amd64/bin:${env:PATH}"
+      },
       "isBackground": true,
       "problemMatcher": []
     },
@@ -37,30 +37,29 @@
     {
         "label": "ng-serve",
         "type": "shell",
-        "command": "ng serve",
+        "command": "ng",
+        "args": ["serve"],
         "options": {
             "cwd": "${workspaceFolder}/loancalculator-front"
         },
         "isBackground": true,
         "problemMatcher": {
-            "owner": "typescript",
-            "source": "ts",
-            "applyTo": "allDocuments",
-            "fileLocation": "relative",
-            "pattern": {
-                "regexp": "^([a-zA-Z]?:[^:]+):(\\d+):(\\d+):\\s+(error|warning)\\s+(TS\\d+):\\s+(.*)$",
-                "file": 1,
-                "line": 2,
-                // "character": 3,
-                "severity": 4,
-                "code": 5,
-                "message": 6
-            },
-            "background": {
-                "activeOnStart": true,
-                "beginsPattern": "Browser application bundle generation|Compiled successfully|Building",
-                "endsPattern": "Compiled successfully|Failed to compile"
-            }
+          "owner": "typescript",
+          "pattern": {
+            "regexp": "^.*$",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^.*Building.*$",
+            "endsPattern": "^.*Watch mode enabled.*$"
+          }
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
         }
     }
   ]
